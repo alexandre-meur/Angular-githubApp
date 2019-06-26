@@ -1,9 +1,14 @@
+
 <div class="container">
   <label for="githubLogin">
     Entrez le nom d'un utilisateur github :
   </label>
     <input id="githubLogin" type="text" (change)="updateGithubLogin($event)"/>
-  <button (click)="submitForm()" class="button">
-    Rechercher
+  <button (click)="submitForm()" class="container__button">
+    Valider
   </button>
+  <p *ngIf="messageErreur !== undefined"
+    class="container__errorMessage">
+    {{messageErreur}}
+  </p>
 </div>

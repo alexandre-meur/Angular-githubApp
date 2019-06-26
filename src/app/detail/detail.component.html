@@ -1,1 +1,40 @@
-<p>detail works!</p>
+<div class = "container">
+	<img *ngIf="this.user.avatar_url !== null"
+	 	alt="avatar"
+		[src]="this.user.avatar_url"
+		class="container__avatar"/>
+	<table class="container__table">
+		<tr>
+				<th class="container__tableCell">
+					Login
+				</th>
+				<td class="container__tableCell">
+					{{this.user.login}}
+				</td>
+		</tr>
+		<tr>
+				<th class="container__tableCell">
+					Type
+				</th>
+				<td class="container__tableCell">
+					{{this.user.type}}
+				</td>
+		</tr>
+		<tr *ngIf="this.user.company !== null">
+				<th class="container__tableCell">
+					Entreprise
+				</th>
+				<td class="container__tableCell">
+					{{this.user.company}}
+				</td>
+		</tr>
+		<tr *ngIf="this.user.bio !== null">
+				<th class="container__tableCell">
+					Bio
+				</th>
+				<td class="container__tableCell">
+					{{this.user.bio}}
+				</td>
+		</tr>
+	</table>
+</div>

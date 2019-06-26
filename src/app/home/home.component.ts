@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
+import { GithubService } from '../services/github.service';
+import { GITHUB_API_URL, MESSAGE_ERREUR } from '../app.constantes';
+import { Router } from '@angular/router';
+import { PATH_DETAIL } from '../app-routes.constantes';
+import { GithubUser } from '../model/GithubUser';
 
 @Component({
   selector: 'app-home',
@@ -8,19 +13,33 @@ import {HttpClient} from "@angular/common/http";
 })
 export class HomeComponent {
 
-  user = '';
+  userLogin = '';
+  messageErreur = undefined;
 
-  constructor(private http:HttpClient) {}
+  constructor(private http:HttpClient,
+      private githubService:GithubService,
+      private router:Router) {}
 
   updateGithubLogin(eventChange) {
-    this.user = eventChange.target.value;
+    this.userLogin = eventChange.target.value;
   }
 
   submitForm() {
-    const GITHUB_API_URL = 'https://api.github.com/users/';
-
     //Envoi de la requête
-    this.http.get(GITHUB_API_URL + this.user)
-      .subscribe()
+    this.http.get(GITHUB_API_URL + this.userLogin)
+      .subscribe({
+          //On passe le résultat au service et on redirige. Le message d'erreur
+          //est aussi mis à undefined.
+          next: (user:GithubUser) => {
+              this.messageErreur = undefined;
+              this.githubService.updateUser(user);
+              this.router.navigate([PATH_DETAIL]);
+          },
+          //En cas d'erreur, on affiche le message d'erreur
+          error: e => {
+              console.log(e);
+              this.messageErreur = MESSAGE_ERREUR;
+          }
+      });
   }
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GithubService } from '../services/github.service';
+import { GithubUser } from '../model/GithubUser';
 
 @Component({
   selector: 'app-detail',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailComponent implements OnInit {
 
-  constructor() { }
+    user:GithubUser = {login: '', type: '', company: null, bio: null, avatar_url: null};
 
-  ngOnInit() {
-  }
+    constructor(private githubService:GithubService) { }
+
+    ngOnInit() {
+        //Subscribe to the observable given by the service
+        this.githubService.getUserObs().subscribe({
+            next: (u:GithubUser) => {
+                this.user = u;
+                console.log(this.user);
+            },
+            error: e => console.log(e),
+        });
+    }
 
 }

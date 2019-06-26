@@ -1,1 +1,49 @@
 /* You can add global styles to this file, and also import other style files */
+
+.app__angularLogo{
+    width: 200px;
+    height: 200px;
+}
+
+.container{
+  max-width: 500px;
+  min-height: 150px;
+  margin: auto;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 3px solid grey;
+  border-radius: 10px;
+}
+
+.container > *{
+	margin-bottom: 20px;
+}
+
+.container__errorMessage{
+    color: red;
+	font-weight: bold;
+}
+
+.container__button{
+  margin: 20px;
+  width: 200px;
+}
+
+.container__avatar{
+    width: 100px;
+    height: 100px;
+    float: right;
+    border-radius: 10px;
+}
+
+.container__table{
+    border-collapse: collapse;
+}
+
+.container__tableCell{
+    border: 2px solid darkgrey;
+    min-width: 100px;
+}
