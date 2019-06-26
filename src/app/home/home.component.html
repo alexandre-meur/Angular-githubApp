@@ -1,0 +1,9 @@
+<div class="container">
+  <label for="githubLogin">
+    Entrez le nom d'un utilisateur github :
+  </label>
+    <input id="githubLogin" type="text" (change)="updateGithubLogin($event)"/>
+  <button (click)="submitForm()" class="button">
+    Rechercher
+  </button>
+</div>
