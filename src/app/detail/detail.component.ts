@@ -38,12 +38,8 @@ export class DetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.userSubscription !== undefined) {
-      this.userSubscription.unsubscribe();
-    }
-    if (this.paramSubscription !== undefined) {
-      this.paramSubscription.unsubscribe();
-    }
+    this.userSubscription && this.userSubscription.unsubscribe();
+    this.paramSubscription && this.paramSubscription.unsubscribe();
   }
 
 }
