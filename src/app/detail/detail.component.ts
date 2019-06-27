@@ -1,8 +1,9 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {GithubService} from '../services/github.service';
 import {GithubUser} from '../model/GithubUser';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
+import {PATH_DETAIL, PATH_DETAIL_FOLLOWERS, PATH_DETAIL_REPOS} from '../app-routes.constantes';
 
 @Component({
   selector: 'app-detail',
@@ -16,15 +17,16 @@ export class DetailComponent implements OnInit, OnDestroy {
   userSubscription: Subscription;
   paramSubscription: Subscription;
 
-  constructor(private githubService: GithubService, private route: ActivatedRoute) {
+  constructor(private githubService: GithubService,
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit() {
     // Subscribe to the observable given by the service
     this.paramSubscription = this.route.paramMap.subscribe(
-      () => {
-        // TODO : Récuération du param
-        this.githubService.getUser('nartawak');
+      (params: ParamMap) => {
+        this.githubService.getUser(params.get('login'));
       }
     );
 
@@ -42,4 +44,11 @@ export class DetailComponent implements OnInit, OnDestroy {
     this.paramSubscription && this.paramSubscription.unsubscribe();
   }
 
+  navigateToRepos() {
+    this.router.navigate([PATH_DETAIL, this.user.login, PATH_DETAIL_REPOS]);
+  }
+
+  navigateToFollowers() {
+    this.router.navigate([PATH_DETAIL, this.user.login, PATH_DETAIL_FOLLOWERS]);
+  }
 }

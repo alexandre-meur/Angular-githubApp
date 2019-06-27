@@ -37,4 +37,18 @@
 				</td>
 		</tr>
 	</table>
+  <div>
+    <button
+      (click)="navigateToRepos()"
+      class="container__tab">
+        Repos
+    </button>
+    <button
+      (click)="navigateToFollowers()"
+      class="container__tab">
+        Followers
+    </button>
+  </div>
+
+  <router-outlet></router-outlet>
 </div>

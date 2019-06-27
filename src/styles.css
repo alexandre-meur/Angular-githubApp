@@ -14,7 +14,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 3px solid grey;
+  border: 3px solid rgb(50, 50, 200);
   border-radius: 10px;
 }
 
@@ -37,6 +37,7 @@
     height: 100px;
     float: right;
     border-radius: 10px;
+  border: 1px solid rgb(50, 50, 250);
 }
 
 .container__table{
@@ -46,4 +47,14 @@
 .container__tableCell{
     border: 2px solid darkgrey;
     min-width: 100px;
+}
+
+.container__tab{
+  min-width: 150px;
+  min-height: 30px;
+  border: 2px lightgrey solid;
+}
+
+.container__tab__active{
+  color: orange;
 }

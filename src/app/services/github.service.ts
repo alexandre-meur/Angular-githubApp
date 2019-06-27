@@ -18,17 +18,15 @@ export class GithubService {
   }
 
   // Met à jour le user et notifie les subscribers
-  getUser(login: string) {
+  getUser(userLogin: string) {
 
-    this.http.get(GITHUB_API_URL + login)
+    this.http.get(GITHUB_API_URL + userLogin)
       .subscribe({
         // On passe le résultat au service et on redirige. Le message d'erreur
         // est aussi mis à undefined.
         next: (user: GithubUser) => {
-
           const {login, type, company, bio, avatar_url}: GithubUser = user;
           this.userSubject.next({login, type, company, bio, avatar_url});
-
         },
         // En cas d'erreur, on affiche le message d'erreur
         error: e => {
