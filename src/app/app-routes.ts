@@ -18,7 +18,7 @@ export const ROUTES: Routes = [
     component: HomeComponent
   },
   {
-    path: PATH_DETAIL,
+    path: PATH_DETAIL + '/:login',
     component: DetailComponent,
     children: [
       {

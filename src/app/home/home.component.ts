@@ -16,30 +16,15 @@ export class HomeComponent {
   userLogin = '';
   messageErreur = undefined;
 
-  constructor(private http:HttpClient,
-      private githubService:GithubService,
-      private router:Router) {}
+  constructor(private router:Router) {}
 
   updateGithubLogin(eventChange) {
     this.userLogin = eventChange.target.value;
   }
 
   submitForm() {
-    //Envoi de la requête
-    this.http.get(GITHUB_API_URL + this.userLogin)
-      .subscribe({
-          //On passe le résultat au service et on redirige. Le message d'erreur
-          //est aussi mis à undefined.
-          next: (user:GithubUser) => {
-              this.messageErreur = undefined;
-              this.githubService.updateUser(user);
-              this.router.navigate([PATH_DETAIL]);
-          },
-          //En cas d'erreur, on affiche le message d'erreur
-          error: e => {
-              console.log(e);
-              this.messageErreur = MESSAGE_ERREUR;
-          }
-      });
+    // Envoi de la requête
+    this.router.navigate([PATH_DETAIL, this.userLogin]);
+
   }
 }

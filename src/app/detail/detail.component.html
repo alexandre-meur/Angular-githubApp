@@ -1,7 +1,7 @@
 <div class = "container">
-	<img *ngIf="this.user.avatar_url !== null"
+	<img *ngIf="user.avatar_url !== null"
 	 	alt="avatar"
-		[src]="this.user.avatar_url"
+		[src]="user.avatar_url"
 		class="container__avatar"/>
 	<table class="container__table">
 		<tr>
@@ -9,7 +9,7 @@
 					Login
 				</th>
 				<td class="container__tableCell">
-					{{this.user.login}}
+					{{user.login}}
 				</td>
 		</tr>
 		<tr>
@@ -17,23 +17,23 @@
 					Type
 				</th>
 				<td class="container__tableCell">
-					{{this.user.type}}
+					{{user.type}}
 				</td>
 		</tr>
-		<tr *ngIf="this.user.company !== null">
+		<tr *ngIf="user.company !== null">
 				<th class="container__tableCell">
 					Entreprise
 				</th>
 				<td class="container__tableCell">
-					{{this.user.company}}
+					{{user.company}}
 				</td>
 		</tr>
-		<tr *ngIf="this.user.bio !== null">
+		<tr *ngIf="user.bio !== null">
 				<th class="container__tableCell">
 					Bio
 				</th>
 				<td class="container__tableCell">
-					{{this.user.bio}}
+					{{user.bio}}
 				</td>
 		</tr>
 	</table>

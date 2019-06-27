@@ -1,27 +1,49 @@
-import { Component, OnInit } from '@angular/core';
-import { GithubService } from '../services/github.service';
-import { GithubUser } from '../model/GithubUser';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {GithubService} from '../services/github.service';
+import {GithubUser} from '../model/GithubUser';
+import {ActivatedRoute} from '@angular/router';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.css']
 })
-export class DetailComponent implements OnInit {
+export class DetailComponent implements OnInit, OnDestroy {
 
-    user:GithubUser = {login: '', type: '', company: null, bio: null, avatar_url: null};
+  user: GithubUser = {login: '', type: '', company: null, bio: null, avatar_url: null};
 
-    constructor(private githubService:GithubService) { }
+  userSubscription: Subscription;
+  paramSubscription: Subscription;
 
-    ngOnInit() {
-        //Subscribe to the observable given by the service
-        this.githubService.getUserObs().subscribe({
-            next: (u:GithubUser) => {
-                this.user = u;
-                console.log(this.user);
-            },
-            error: e => console.log(e),
-        });
+  constructor(private githubService: GithubService, private route: ActivatedRoute) {
+  }
+
+  ngOnInit() {
+    // Subscribe to the observable given by the service
+    this.paramSubscription = this.route.paramMap.subscribe(
+      () => {
+        // TODO : Récuération du param
+        this.githubService.getUser('nartawak');
+      }
+    );
+
+    this.userSubscription = this.githubService.user$.subscribe({
+      next: (u: GithubUser) => {
+        this.user = u;
+        console.log(this.user);
+      },
+      error: e => console.log(e),
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.userSubscription !== undefined) {
+      this.userSubscription.unsubscribe();
     }
+    if (this.paramSubscription !== undefined) {
+      this.paramSubscription.unsubscribe();
+    }
+  }
 
 }
