@@ -10,7 +10,15 @@ import {HttpClient} from '@angular/common/http';
 })
 export class GithubService {
 
-  private userSubject = new BehaviorSubject<GithubUser>({login: '', type: '', company: null, bio: null, avatar_url: null});
+  private userSubject = new BehaviorSubject<GithubUser>({
+    login: '',
+    type: '',
+    company: null,
+    bio: null,
+    avatar_url: null,
+    followers_url: '',
+    repos_url: '',
+  });
 
   user$ = this.userSubject.asObservable();
 
@@ -25,8 +33,9 @@ export class GithubService {
         // On passe le résultat au service et on redirige. Le message d'erreur
         // est aussi mis à undefined.
         next: (user: GithubUser) => {
-          const {login, type, company, bio, avatar_url}: GithubUser = user;
-          this.userSubject.next({login, type, company, bio, avatar_url});
+          console.log(user);
+          const {login, type, company, bio, avatar_url, followers_url, repos_url}: GithubUser = user;
+          this.userSubject.next({login, type, company, bio, avatar_url, followers_url, repos_url});
         },
         // En cas d'erreur, on affiche le message d'erreur
         error: e => {

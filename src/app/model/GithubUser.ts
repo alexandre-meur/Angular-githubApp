@@ -6,4 +6,6 @@ export interface GithubUser{
 	company: string;
 	bio: string;
 	avatar_url: string;
+	followers_url: string;
+	repos_url: string;
 }

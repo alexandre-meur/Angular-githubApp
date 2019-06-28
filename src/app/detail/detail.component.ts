@@ -12,7 +12,14 @@ import {PATH_DETAIL, PATH_DETAIL_FOLLOWERS, PATH_DETAIL_REPOS} from '../app-rout
 })
 export class DetailComponent implements OnInit, OnDestroy {
 
-  user: GithubUser = {login: '', type: '', company: null, bio: null, avatar_url: null};
+  user: GithubUser = {
+    login: '', type: '',
+    company: null,
+    bio: null,
+    avatar_url: null,
+    followers_url: '',
+    repos_url: '',
+  };
 
   userSubscription: Subscription;
   paramSubscription: Subscription;
